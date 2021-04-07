@@ -1,0 +1,2940 @@
+{
+	"info": {
+		"_postman_id": "a6d38586-4c6b-4df8-aef9-c4d8f6462401",
+		"name": "RestAPI_Sciforma",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "94e62d2a-4a5a-47ef-b445-d1224b65753c",
+						"exec": [
+							"pm.variables.get(\"sciforma_username\");",
+							"pm.variables.get(\"sciforma_password\");",
+							"pm.variables.get(\"sciforma_url\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"username\" : \"{{sciforma_username}}\", \r\n\t\"password\" : \"{{sciforma_password}}\", \r\n\t\"url\": \"{{sciforma_url}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{security_url}}/login",
+					"host": [
+						"{{security_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sessionid\": \"{{sessionId}}\"\n}"
+				},
+				"url": {
+					"raw": "{{security_url}}/logout",
+					"host": [
+						"{{security_url}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generate API Key",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5eca72a8-2eff-4388-9ecf-d5fd574b00b8",
+						"exec": [
+							"pm.variables.get(\"sciforma_username\");",
+							"pm.variables.get(\"sciforma_password\");",
+							"pm.variables.get(\"sciforma_url\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"username\" : \"{{sciforma_username}}\", \r\n\t\"password\" : \"{{sciforma_password}}\", \r\n\t\"url\": \"{{sciforma_url}}\",\r\n\t\"description\" : \"Api KEY generated for NIFI PROD\"\r\n}"
+				},
+				"url": {
+					"raw": "{{security_url}}/generateApiKey",
+					"host": [
+						"{{security_url}}"
+					],
+					"path": [
+						"generateApiKey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get related api keys",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{security_url}}/apikey/:apiKeyCode",
+					"host": [
+						"{{security_url}}"
+					],
+					"path": [
+						"apikey",
+						":apiKeyCode"
+					],
+					"variable": [
+						{
+							"key": "apiKeyCode",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update api key",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"password\" : \"mynewpass\", \r\n\t\"description\" : \"Api KEY for Apache Nifi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{security_url}}/apikey/:apiKeyCode",
+					"host": [
+						"{{security_url}}"
+					],
+					"path": [
+						"apikey",
+						":apiKeyCode"
+					],
+					"variable": [
+						{
+							"key": "apiKeyCode",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete api key",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{security_url}}/removeApiKey?username=xx&url=rego-consulting-test&apiKeyCode=irdBxdTMFWsRM2Hx7O8m6HbBcY9gI7xx",
+					"host": [
+						"{{security_url}}"
+					],
+					"path": [
+						"removeApiKey"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "xx"
+						},
+						{
+							"key": "url",
+							"value": "rego-consulting-test"
+						},
+						{
+							"key": "apiKeyCode",
+							"value": "UL2nt2XWzMcL8UbSdF7Vf3erwkUhK2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete session",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{security_url}}/removeSession?sessionID=1b04b651-4e0c-449b-951b-9fa04554136a&apiKeyCode=O3vFPzj6nD8l4yvudYbX4C3KqImHRo",
+					"host": [
+						"{{security_url}}"
+					],
+					"path": [
+						"removeSession"
+					],
+					"query": [
+						{
+							"key": "sessionID",
+							"value": "1b04b651-4e0c-449b-951b-9fa04554136a"
+						},
+						{
+							"key": "apiKeyCode",
+							"value": "irdBxdTMFWsRM2Hx7O8m6HbBcY9gI7xx"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authentication SessionId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources/:resourceID",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID"
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "JDOW1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authentication API Key",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources/:resourceID?apiKey={{apikey}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "{{apikey}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "JDOW1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authentication Basic",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "https://rego-consulting-test.sciforma.net/sciforma|psnextadmin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "4W2UY9rtquK!",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources/:resourceID",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID"
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "JDOW1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "definitions Normal",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/definitions/:objectName",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"definitions",
+						":objectName"
+					],
+					"variable": [
+						{
+							"key": "objectName",
+							"value": "projects"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "definitions dataviews (Global)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/definitions/dataviews?dvName=Global Actions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"definitions",
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Global Actions"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "definitions dataviews (Projects)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/definitions/dataviews?dvName=Backlog Items&parentType=projects&parentId=1A12SNR",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"definitions",
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Backlog Items"
+						},
+						{
+							"key": "parentType",
+							"value": "projects"
+						},
+						{
+							"key": "parentId",
+							"value": "1A12SNR"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource GET",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"value": "{{sessionId}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "filter",
+						"value": "('isResource' = 'true')",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources/:resourceID",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID"
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "ADMIN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource GET All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"value": "{{sessionId}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources?",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "startDate,endDate,id,referencedUser,internalID,firstName,lastName",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic aHR0cHM6Ly9yZWdvLWNvbnN1bHRpbmctdGVzdC5zY2lmb3JtYS5uZXQvc2NpZm9ybWF8cHNuZXh0YWRtaW58NFcyVVk5cnRxdUsh",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"object\": {\n        \"id\": \"JDOW15\",\n        \"organization\": \"ABC Corporation\",\n        \"writable\": \"No\",\n        \"number\": 104,\n        \"rBS\": \"A.Code2000\",\n        \"firstName\": \"John 15\",\n        \"middleName\": \"\",\n        \"lastName\": \"Doe\",\n        \"name\": \"Doe, John\"\n    }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/resources",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource POST Many",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"records\" : [\r\n\t\t{\r\n\t\t\t\"object\": {\r\n\t\t\t\t\"id\": \"JDOW7\",\r\n\t\t\t\t\"organization\": \"ABC Corporation\",\r\n\t\t\t\t\"writable\": \"No\",\r\n\t\t\t\t\"number\": 84,\r\n\t\t\t\t\"rBS\": \"A\",\r\n\t\t\t\t\"firstName\": \"John\",\r\n\t\t\t\t\"middleName\": \"\",\r\n\t\t\t\t\"lastName\": \"Doe\",\r\n\t\t\t\t\"name\": \"Doe, John\",\r\n\t\t\t\t\"cost\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"startDate\": \"1969-12-31 07:00:00\",\r\n\t\t\t\t\t\t\"finishDate\": \"292278994-08-17 02:12:55\",\r\n\t\t\t\t\t\t\"value\": 150\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"availability\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"startDate\": \"1969-12-31 07:00:00\",\r\n\t\t\t\t\t\t\"finishDate\": \"292278994-08-17 02:12:55\",\r\n\t\t\t\t\t\t\"value\": 1\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"calendarStatus\": \"\",\r\n\t\t\t\t\"organizationHistory\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"startDate\": \"2019-05-29 04:42:09\",\r\n\t\t\t\t\t\t\"finishDate\": \"292278994-08-17 02:12:55\",\r\n\t\t\t\t\t\t\"value\": \"ABC Corporation\"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"jobClassification\": \"Employee.R&D.Product Engineer\",\r\n\t\t\t\t\"skills\": [],\r\n\t\t\t\t\"defaultRate\": 1,\r\n\t\t\t\t\"emailAddress1\": \"\",\r\n\t\t\t\t\"emailAddress2\": \"\",\r\n\t\t\t\t\"emailAddress3\": \"\",\r\n\t\t\t\t\"status\": \"ACTIVE\",\r\n\t\t\t\t\"timeEntrySet\": \"None\",\r\n\t\t\t\t\"timeEntryOverrideSet\": \"None\",\r\n\t\t\t\t\"timeEntryOverrideStart\": \"1969-12-31 06:59:59\",\r\n\t\t\t\t\"timeEntryOverrideStop\": \"1969-12-31 06:59:59\",\r\n\t\t\t\t\"availableEffort\": [],\r\n\t\t\t\t\"actualEffort\": [],\r\n\t\t\t\t\"remainingEffort\": [],\r\n\t\t\t\t\"totalEffort\": [],\r\n\t\t\t\t\"actualCost\": [],\r\n\t\t\t\t\"remainingCost\": [],\r\n\t\t\t\t\"totalCost\": [],\r\n\t\t\t\t\"percentageAllocated\": [],\r\n\t\t\t\t\"userRole\": \"*Administrator\",\r\n\t\t\t\t\"startDate\": \"2019-05-01 02:00:00\",\r\n\t\t\t\t\"endDate\": \"2019-06-01 01:59:59\",\r\n\t\t\t\t\"shouldLevel\": true,\r\n\t\t\t\t\"referencedUser\": \"Doe, John\",\r\n\t\t\t\t\"actualEffortAdjustment\": [],\r\n\t\t\t\t\"totalCommitmentEffort\": [],\r\n\t\t\t\t\"submittedCommitmentEffort\": [],\r\n\t\t\t\t\"pendingOrganization\": \"\",\r\n\t\t\t\t\"mappedPendingOrganization\": \"\",\r\n\t\t\t\t\"pendingAvailableEffort\": [],\r\n\t\t\t\t\"internalID\": 977290,\r\n\t\t\t\t\"totalCommitmentRate\": [],\r\n\t\t\t\t\"submittedCommitmentRate\": [],\r\n\t\t\t\t\"calendarFeeds\": [],\r\n\t\t\t\t\"expectedEffort\": 0,\r\n\t\t\t\t\"permissions\": \"*System Default\",\r\n\t\t\t\t\"isUser\": true,\r\n\t\t\t\t\"remainingEffortMix\": [],\r\n\t\t\t\t\"remainingCostMix\": [],\r\n\t\t\t\t\"actualEffortMix\": [],\r\n\t\t\t\t\"actualCostMix\": [],\r\n\t\t\t\t\"totalEffortMix\": [],\r\n\t\t\t\t\"totalCostMix\": [],\r\n\t\t\t\t\"requestedEffort\": 0,\r\n\t\t\t\t\"resourceText\": \"\",\r\n\t\t\t\t\"menu\": \"\",\r\n\t\t\t\t\"expenseCalculationMethod\": \"Per Meal\",\r\n\t\t\t\t\"userPicture\": \"\",\r\n\t\t\t\t\"costCenter\": \"TRANSACTIONAL/OPEX\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"object\": {\r\n\t\t\t\t\"id\": \"JDOW8\",\r\n\t\t\t\t\"organization\": \"ABC Corporation\",\r\n\t\t\t\t\"writable\": \"No\",\r\n\t\t\t\t\"number\": 84,\r\n\t\t\t\t\"rBS\": \"A\",\r\n\t\t\t\t\"firstName\": \"John\",\r\n\t\t\t\t\"middleName\": \"\",\r\n\t\t\t\t\"lastName\": \"Doe\",\r\n\t\t\t\t\"name\": \"Doe, John\",\r\n\t\t\t\t\"cost\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"startDate\": \"1969-12-31 07:00:00\",\r\n\t\t\t\t\t\t\"finishDate\": \"292278994-08-17 02:12:55\",\r\n\t\t\t\t\t\t\"value\": 150\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"availability\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"startDate\": \"1969-12-31 07:00:00\",\r\n\t\t\t\t\t\t\"finishDate\": \"292278994-08-17 02:12:55\",\r\n\t\t\t\t\t\t\"value\": 1\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"calendarStatus\": \"\",\r\n\t\t\t\t\"organizationHistory\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"startDate\": \"2019-05-29 04:42:09\",\r\n\t\t\t\t\t\t\"finishDate\": \"292278994-08-17 02:12:55\",\r\n\t\t\t\t\t\t\"value\": \"ABC Corporation\"\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"jobClassification\": \"Employee.R&D.Product Engineer\",\r\n\t\t\t\t\"skills\": [],\r\n\t\t\t\t\"defaultRate\": 1,\r\n\t\t\t\t\"emailAddress1\": \"\",\r\n\t\t\t\t\"emailAddress2\": \"\",\r\n\t\t\t\t\"emailAddress3\": \"\",\r\n\t\t\t\t\"status\": \"ACTIVE\",\r\n\t\t\t\t\"timeEntrySet\": \"None\",\r\n\t\t\t\t\"timeEntryOverrideSet\": \"None\",\r\n\t\t\t\t\"timeEntryOverrideStart\": \"1969-12-31 06:59:59\",\r\n\t\t\t\t\"timeEntryOverrideStop\": \"1969-12-31 06:59:59\",\r\n\t\t\t\t\"availableEffort\": [],\r\n\t\t\t\t\"actualEffort\": [],\r\n\t\t\t\t\"remainingEffort\": [],\r\n\t\t\t\t\"totalEffort\": [],\r\n\t\t\t\t\"actualCost\": [],\r\n\t\t\t\t\"remainingCost\": [],\r\n\t\t\t\t\"totalCost\": [],\r\n\t\t\t\t\"percentageAllocated\": [],\r\n\t\t\t\t\"userRole\": \"*Administrator\",\r\n\t\t\t\t\"startDate\": \"2019-05-01 02:00:00\",\r\n\t\t\t\t\"endDate\": \"2019-06-01 01:59:59\",\r\n\t\t\t\t\"shouldLevel\": true,\r\n\t\t\t\t\"referencedUser\": \"Doe, John\",\r\n\t\t\t\t\"actualEffortAdjustment\": [],\r\n\t\t\t\t\"totalCommitmentEffort\": [],\r\n\t\t\t\t\"submittedCommitmentEffort\": [],\r\n\t\t\t\t\"pendingOrganization\": \"\",\r\n\t\t\t\t\"mappedPendingOrganization\": \"\",\r\n\t\t\t\t\"pendingAvailableEffort\": [],\r\n\t\t\t\t\"internalID\": 977290,\r\n\t\t\t\t\"totalCommitmentRate\": [],\r\n\t\t\t\t\"submittedCommitmentRate\": [],\r\n\t\t\t\t\"calendarFeeds\": [],\r\n\t\t\t\t\"expectedEffort\": 0,\r\n\t\t\t\t\"permissions\": \"*System Default\",\r\n\t\t\t\t\"isUser\": true,\r\n\t\t\t\t\"remainingEffortMix\": [],\r\n\t\t\t\t\"remainingCostMix\": [],\r\n\t\t\t\t\"actualEffortMix\": [],\r\n\t\t\t\t\"actualCostMix\": [],\r\n\t\t\t\t\"totalEffortMix\": [],\r\n\t\t\t\t\"totalCostMix\": [],\r\n\t\t\t\t\"requestedEffort\": 0,\r\n\t\t\t\t\"resourceText\": \"\",\r\n\t\t\t\t\"menu\": \"\",\r\n\t\t\t\t\"expenseCalculationMethod\": \"Per Meal\",\r\n\t\t\t\t\"userPicture\": \"\",\r\n\t\t\t\t\"costCenter\": \"TRANSACTIONAL/OPEX\"\r\n\t\t\t}\r\n\t\t}\r\n\t]\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/resources",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project GET",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic aHR0cHM6Ly9yZWdvLWNvbnN1bHRpbmctdGVzdC5zY2lmb3JtYS5uZXQvc2NpZm9ybWF8cHNuZXh0YWRtaW58NFcyVVk5cnRxdUsh",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects/:projectID",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "id,name,manager1,sapProjectType"
+						}
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "1A12SNR"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project GET All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"object\": {\r\n\t\t\"id\": \"1A12STEST2\",\r\n\t\t\"key\": \"1A12STEST2\",\r\n\t\t\"name\": \"Test project 2\",\r\n        \"reportRisksFilter\": \"All Risks\",\r\n        \"shiftDeadline\": 0,\r\n        \"trackingSource\": \"Assignment Timesheet\",\r\n        \"interlinkSource\": \"\",\r\n        \"outlineYFld\": 0,\r\n        \"approved\": false,\r\n        \"honorRequiredDates\": false\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/projects",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project POST Workflow",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"object\": {\r\n\t\t\"id\": \"1A12STEST\",\r\n\t\t\"key\": \"1A12STEST\",\r\n\t\t\"name\": \"Test project Changed\",\r\n        \"reportRisksFilter\": \"All Risks\",\r\n        \"shiftDeadline\": 0,\r\n        \"trackingSource\": \"Assignment Timesheet\",\r\n        \"interlinkSource\": \"\",\r\n        \"outlineYFld\": 0,\r\n        \"approved\": false,\r\n        \"honorRequiredDates\": false,\r\n        \"workflowConfiguration\": {\r\n            \"workflow\": \"Project\",\r\n            \"workflowState\": \"Ongoing\"\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/projects",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project GET List (Filters)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects?filter=(('name' like 'Agile 1 13_02_2020') and ('useAgileMethodology' = 'true'))&fields=id,internalID,name,manager1,modifiedDate,modifiedBy",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "(('key' like '1A12SNR') or ('key' = 'JFCF8J0W')  or ('key' = '348,206.00') or ('percentageCompleted' > '0'))",
+							"disabled": true
+						},
+						{
+							"key": "filter",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "filter",
+							"value": "(('name' like 'Agile 1 13_02_2020') and ('useAgileMethodology' = 'true'))"
+						},
+						{
+							"key": "fields",
+							"value": "id,internalID,name,manager1,modifiedDate,modifiedBy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project GET Fields",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Basic aHR0cHM6Ly9yZWdvLWNvbnN1bHRpbmctdGVzdC5zY2lmb3JtYS5uZXQvc2NpZm9ybWF8cHNuZXh0YWRtaW58NFcyVVk5cnRxdUsh",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects/:projectID?fields=key,id,workflowConfiguration,workflowChangeLog",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "key,id,workflowConfiguration,workflowChangeLog"
+						}
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "JOZHYZZN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project GET expand",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic aHR0cHM6Ly9yZWdvLWNvbnN1bHRpbmctdGVzdC5zY2lmb3JtYS5uZXQvc2NpZm9ybWF8cHNuZXh0YWRtaW58NFcyVVk5cnRxdUsh",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects/:projectID?fields=key,id,name&expand=Backlog Items",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "key,id,name"
+						},
+						{
+							"key": "expand",
+							"value": "Backlog Items"
+						}
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "JOZHYZZN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project GET Last 12 hours",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects?filter=('createDate' >= '2019-07-25 03:00:00')&fields=id,name,createDate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "('createDate' >= '2019-07-25 03:00:00')"
+						},
+						{
+							"key": "fields",
+							"value": "id,name,createDate"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "project POST Actions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"actions\": [\r\n\t\t{\r\n\t\t\t\"name\" : \"applyTimesheets\",\r\n\t\t\t\"params\" : {\r\n\t\t\t\t\"startDate\" : \"2019-05-20 00:00:00\",\r\n\t\t\t\t\"endDate\" : \"2019-05-28 23:59:59\"\r\n\t\t\t}\r\n\t\t}\r\n\t]\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/projects/:projectID/actions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID",
+						"actions"
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "JATO7AWQ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "task GET",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects/:projectID/tasks/:taskID",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID",
+						"tasks",
+						":taskID"
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "1A12SNR"
+						},
+						{
+							"key": "taskID",
+							"value": "19TESTTASK"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "task GET All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects/:projectID/tasks",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID",
+						"tasks"
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "1A12SNR"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "task POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"object\": {\r\n        \"id\": \"19TESTTASK\",\r\n        \"name\": \"Project management Test2\",\r\n        \"number\": 1,\r\n        \"wBS\": \"\",\r\n        \"workPackageID\": \"\",\r\n        \"description\": \"\",\r\n        \"duration\": 63360,\r\n        \"completedDuration\": 50688,\r\n        \"remainingDuration\": 0,\r\n        \"manager1\": \"\",\r\n        \"manager2\": \"\",\r\n        \"manager3\": \"\",\r\n        \"predecessornumbers\": [],\r\n        \"successornumbers\": [],\r\n        \"resourcenumbers\": [],\r\n        \"resourceNames\": [],\r\n        \"start\": \"1969-12-31 23:00:00\",\r\n        \"finish\": \"2019-04-30 15:27:24\",\r\n        \"completedDate\": \"2000-05-11 02:30:32\",\r\n        \"percentageCompleted\": 1,\r\n        \"startDelay\": 0,\r\n        \"trackingActuals\": false,\r\n        \"outlineLevel\": 3,\r\n        \"startNoEarlierThan\": \"1969-12-31 15:59:59\",\r\n        \"scheduleType\": \"Hammock\",\r\n        \"baselineStart\": \"1969-12-31 15:59:59\",\r\n        \"baselineFinish\": \"1969-12-31 15:59:59\",\r\n        \"allowSplitting\": true,\r\n        \"requiredDate\": \"1969-12-31 03:59:59\",\r\n        \"requiredLabor\": 0,\r\n        \"mustStartOn\": \"1969-12-31 03:59:59\",\r\n        \"onCriticalPath\": false,\r\n        \"isParent\": false,\r\n        \"levelingPriority\": 50,\r\n        \"levelingConflict\": false,\r\n        \"performingOrganizations\": [],\r\n        \"issues\": \"\",\r\n        \"eVMethod\": \"% Complete\",\r\n        \"physicalpercentageComplete\": 0,\r\n        \"freeFloat\": 0,\r\n        \"totalFloat\": 0,\r\n        \"lateStart\": \"2019-04-30 15:27:24\",\r\n        \"lateFinish\": \"2019-04-30 15:27:24\",\r\n        \"allowasInterlinkSource\": false,\r\n        \"interlinkSource\": \"\",\r\n        \"allowMyWorkAdd\": true,\r\n        \"workflowStateVote\": \"\",\r\n        \"baseline1Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline2Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline3Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline4Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline5Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline6Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline7Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline8Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline9Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline10Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline11Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline12Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline13Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline14Start\": \"1969-12-31 15:59:59\",\r\n        \"baseline1Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline2Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline3Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline4Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline5Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline6Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline7Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline8Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline9Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline10Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline11Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline12Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline13Finish\": \"1969-12-31 15:59:59\",\r\n        \"baseline14Finish\": \"1969-12-31 15:59:59\",\r\n        \"showChildLabels\": false,\r\n        \"showLabelsonParent\": false,\r\n        \"networkColumn\": 0,\r\n        \"networkRow\": 0,\r\n        \"outlineColumn\": 0,\r\n        \"outlineRow\": 0,\r\n        \"showChildSymbols\": false,\r\n        \"showSymbolsonParent\": false,\r\n        \"closed\": false,\r\n        \"showNonSummarized\": false,\r\n        \"allowDelete\": true,\r\n        \"bufferLock\": false,\r\n        \"bufferIncursion\": \"1969-12-31 15:59:59\",\r\n        \"bufferIncursionGuide\": \"1969-12-31 15:59:59\",\r\n        \"modifiedBy\": \"\",\r\n        \"modifiedDate\": \"1969-12-31 15:59:59\",\r\n        \"bufferExpectedFinish\": \"1969-12-31 15:59:59\",\r\n        \"internalID\": 994860,\r\n        \"finishDelay\": 0,\r\n        \"pinDate\": \"1969-12-31 15:59:59\",\r\n        \"onCriticalChain\": false,\r\n        \"safeDuration\": 0,\r\n        \"bufferDurationGuide\": 0,\r\n        \"chainRemaining\": 0,\r\n        \"bufferCalculationMethod\": \"\",\r\n        \"originalChainLength\": 0,\r\n        \"extendedLock\": false,\r\n        \"lockedBy\": \"\",\r\n        \"performingResources\": [],\r\n        \"performingCostItems\": [],\r\n        \"performingUsers\": [],\r\n        \"actualLaborEffort\": [],\r\n        \"actualLaborCost\": [],\r\n        \"actualCostItemCost\": [],\r\n        \"actualCost\": [],\r\n        \"remainingLaborEffort\": [],\r\n        \"remainingLaborCost\": [],\r\n        \"remainingCostItemCost\": [],\r\n        \"remainingCost\": [],\r\n        \"totalLaborEffort\": [],\r\n        \"totalLaborCost\": [],\r\n        \"totalCostItemCost\": [],\r\n        \"totalCost\": [],\r\n        \"baselineLaborEffort\": [],\r\n        \"baselineLaborCost\": [],\r\n        \"baselineCostItemCost\": [],\r\n        \"baselineCost\": [],\r\n        \"laborACWP\": [],\r\n        \"costItemACWP\": [],\r\n        \"aCWP\": [],\r\n        \"laborBCWS\": [],\r\n        \"costItemBCWS\": [],\r\n        \"bCWS\": [],\r\n        \"laborBCWP\": [],\r\n        \"costItemBCWP\": [],\r\n        \"bCWP\": [],\r\n        \"baselineDuration\": 0,\r\n        \"percentageLaborEffortComplete\": [],\r\n        \"sujetIssues\": \"\",\r\n        \"topicIssues\": \"\",\r\n        \"standardIssues\": \"\",\r\n        \"epicOwnerPicture\": \"\",\r\n        \"epic\": \"\",\r\n        \"interlinkMirroringTtoT\": \"Task to Task (Mirroring)\",\r\n        \"interlinkConstraintTtoT\": \"Task to Task (External Constraint)\",\r\n        \"workPackageUserWriter\": [],\r\n        \"workPackageUserReader\": [],\r\n        \"workPackageReportComments\": \"\",\r\n        \"workPackagePriority\": \"\",\r\n        \"workPackageReportImportantEvents\": \"\",\r\n        \"workPackageReportDiscussion\": \"\",\r\n        \"workPackageLatestFinish\": \"1969-12-31 03:59:59\",\r\n        \"workPackageEarliestStart\": \"1969-12-31 03:59:59\",\r\n        \"workPackageOrgWriter\": \"\",\r\n        \"workPackageOrgReader\": \"\",\r\n        \"workPackageTimeStatus\": 0,\r\n        \"workPackageTemporaryID\": \"\",\r\n        \"workPackagetype\": \"\",\r\n        \"workPackageTrendStatus\": 0,\r\n        \"workPackageReportMode\": 0,\r\n        \"workPackageReportIsImportant\": false,\r\n        \"workPackageScopeStatus\": 0,\r\n        \"workPackageReportNextSteps\": \"\",\r\n        \"menu\": \"\",\r\n        \"manager3Picture\": \"\",\r\n        \"mspFinish\": \"1969-12-31 03:59:59\",\r\n        \"mspPctCompleted\": 0,\r\n        \"iterationOwnerPicture\": \"\",\r\n        \"iteration\": \"\",\r\n        \"manager2Picture\": \"\",\r\n        \"manager1picture\": \"\",\r\n        \"workPackageContractLock\": false,\r\n        \"filterTaskLevel\": \"2\",\r\n        \"workPackageDescription\": \"\",\r\n        \"workPackageCostStatus\": 0,\r\n        \"release\": \"\",\r\n        \"mspStart\": \"1969-12-31 03:59:59\",\r\n        \"workPackageReportRisksFilter\": \"\",\r\n        \"releaseOwnerPicture\": \"\",\r\n        \"ganttSoftAssignment\": \"\",\r\n        \"ganttHardAssignmentRate\": 1,\r\n        \"ganttWatchList\": false,\r\n        \"ganttSoftAssignmentRate\": 1,\r\n        \"ganttFlagged\": \"\",\r\n        \"exportToMSP\": false,\r\n        \"ganttHardAssignment\": \"\",\r\n        \"ganttCostItemAssignmentInternalID\": 0,\r\n        \"interlinkPID\": \"\",\r\n        \"interlinkMap\": \"\",\r\n        \"workPackageReportIssuesFilter\": \"\",\r\n        \"interlinkTID\": \"\",\r\n        \"workPackageReportIncludeIssues\": false,\r\n        \"workPackageReportIncludeBudget\": false,\r\n        \"workPackageReportIncludeRisks\": false,\r\n        \"workPackageReportIncludePlanning\": false,\r\n        \"includeMilestones\": false,\r\n        \"includeFlaggedTasks\": false,\r\n        \"deliverablesTaskAlerts\": false,\r\n        \"deliverablesDateAlerts\": false,\r\n        \"workPackageReportEcoMode\": false,\r\n        \"deliverablesWorkflowAlerts\": false,\r\n        \"workPackageContractStart\": \"1969-12-31 03:59:59\",\r\n        \"workPackageContractFinish\": \"1969-12-31 03:59:59\",\r\n        \"deliverableID\": 0,\r\n        \"costCenter\": \"INFORMATION\",\r\n        \"taskPriority\": \"\",\r\n        \"taskText\": \"\",\r\n        \"workPackageReportDecisions\": \"\",\r\n        \"additionalIndicator2\": 3,\r\n        \"workPackageReportMeetingAttendees\": \"\",\r\n        \"contractDescription\": \"\",\r\n        \"additionalIndicator1\": 3,\r\n        \"workPackageDeliverablesFilter\": \"\",\r\n        \"relatedPhases\": [],\r\n        \"workPackageReportIncludeDeliverables\": false,\r\n        \"contract\": false,\r\n        \"dependenciespercentageCompleted\": 0,\r\n        \"dependenciesOwner\": \"\",\r\n        \"dependenciesStart\": \"1969-12-31 03:59:59\",\r\n        \"dependenciesFinish\": \"1969-12-31 03:59:59\",\r\n        \"dependenciesTotalCost\": 0,\r\n        \"dependenciesTotalEffort\": 0\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/projects/:projectID/tasks",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID",
+						"tasks"
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "1A12SNR"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "task POST Many",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"records\": [\r\n\t\t{\r\n\t\t\t\"object\": {\r\n\t\t\t\t\"id\": \"J4H8RLA01\",\r\n\t\t\t\t\"name\": \"Concept and selection\",\r\n\t\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\t\"outlineLevel\": 1,\r\n\t\t\t\t\"scheduleType\": \"ASAP\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"object\": {\r\n\t\t\t\t\"id\": \"J4H8RLA02\",\r\n\t\t\t\t\"name\": \"Project Proposal and Evaluation\",\r\n\t\t\t\t\"duration\": 80,\r\n\t\t\t\t\"completedDuration\": 0,\r\n\t\t\t\t\"remainingDuration\": 80,\r\n\t\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\t\"outlineLevel\": 2,\r\n\t\t\t\t\"scheduleType\": \"ASAP\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"object\": {\r\n\t\t\t\t\"id\": \"J4H8RLA03\",\r\n\t\t\t\t\"name\": \"Project Team Startup\",\r\n\t\t\t\t\"duration\": 160,\r\n\t\t\t\t\"completedDuration\": 0,\r\n\t\t\t\t\"remainingDuration\": 160,\r\n\t\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\t\"outlineLevel\": 2,\r\n\t\t\t\t\"scheduleType\": \"ASAP\",\r\n\t\t\t\t\"predecessorList\" : [\"J4H8RLA02\"]\r\n\t\t\t}\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"object\": {\r\n\t\t\t\t\"id\": \"J4H8RLA04\",\r\n\t\t\t\t\"name\": \"End of Concept Phase Checklist\",\r\n\t\t\t\t\"duration\": 0,\r\n\t\t\t\t\"completedDuration\": 0,\r\n\t\t\t\t\"remainingDuration\": 0,\r\n\t\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\t\"outlineLevel\": 2,\r\n\t\t\t\t\"scheduleType\": \"ASAP\",\r\n\t\t\t\t\"predecessorList\" : [\"J4H8RLA03\", \"J4H8RLA02\"]\r\n\t\t\t}\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"object\": {\r\n\t\t\t\t\"id\": \"J4H8RLA05\",\r\n\t\t\t\t\"name\": \"Initiation and Planning\",\r\n\t\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\t\"outlineLevel\": 1,\r\n\t\t\t\t\"scheduleType\": \"ASAP\",\r\n\t\t\t\t\"predecessorList\" : [\"J4H8RLA04\"]\r\n\t\t\t}\r\n\t\t},\r\n\t\t{\r\n\t\t  \"object\": {\r\n\t\t\t\"id\": \"J4H8RLA06\",\r\n\t\t\t\"name\": \"Project Definition and Requirements\",\r\n\t\t\t\"duration\": 160,\r\n\t\t\t\"completedDuration\": 0,\r\n\t\t\t\"remainingDuration\": 160,\r\n\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\"outlineLevel\": 2,\r\n\t\t\t\"scheduleType\": \"ASAP\"\r\n\t\t  }\r\n\t\t},\r\n\t\t{\r\n\t\t  \"object\": {\r\n\t\t\t\"id\": \"J4H8RLA07\",\r\n\t\t\t\"name\": \"High-Level Design and Reviews\",\r\n\t\t\t\"duration\": 80,\r\n\t\t\t\"completedDuration\": 0,\r\n\t\t\t\"remainingDuration\": 80,\r\n\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\"outlineLevel\": 2,\r\n\t\t\t\"scheduleType\": \"ASAP\",\r\n\t\t\t\"predecessorList\" : [\"J4H8RLA06\"]\r\n\t\t  }\r\n\t\t},\r\n\t\t{\r\n\t\t  \"object\": {\r\n\t\t\t\"id\": \"J4H8RLA08\",\r\n\t\t\t\"name\": \"Team and Communication\",\r\n\t\t\t\"duration\": 40,\r\n\t\t\t\"completedDuration\": 0,\r\n\t\t\t\"remainingDuration\": 40,\r\n\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\"outlineLevel\": 2,\r\n\t\t\t\"scheduleType\": \"ASAP\",\r\n\t\t\t\"predecessorList\" : [\"J4H8RLA06\"]\r\n\t\t  }\r\n\t\t},\r\n\t\t{\r\n\t\t  \"object\": {\r\n\t\t\t\"id\": \"J4H8RLA09\",\r\n\t\t\t\"name\": \"Planning, Scheduling, Estimating, Costs, and Risks\",\r\n\t\t\t\"duration\": 120,\r\n\t\t\t\"completedDuration\": 0,\r\n\t\t\t\"remainingDuration\": 120,\r\n\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\"outlineLevel\": 2,\r\n\t\t\t\"scheduleType\": \"ASAP\",\r\n\t\t\t\"predecessorList\" : [\"J4H8RLA06\"]\r\n\t\t  }\r\n\t\t},\r\n\t\t{\r\n\t\t  \"object\": {\r\n\t\t\t\"id\": \"J4H8RLA10\",\r\n\t\t\t\"name\": \"End of Initiation Phase Checklist\",\r\n\t\t\t\"duration\": 0,\r\n\t\t\t\"completedDuration\": 0,\r\n\t\t\t\"remainingDuration\": 0,\r\n\t\t\t\"percentageCompleted\": 0,\r\n\t\t\t\"outlineLevel\": 2,\r\n\t\t\t\"scheduleType\": \"ASAP\",\r\n\t\t\t\"predecessorList\" : [\"J4H8RLA07\", \"J4H8RLA08\", \"J4H8RLA09\"]\r\n\t\t  }\r\n\t\t}\r\n\t]\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/projects/:projectID/tasks",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID",
+						"tasks"
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "1A12SNR"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "task POST Actions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"actions\": [\r\n\t\t{\r\n\t\t\t\"name\" : \"applyTimesheets\",\r\n\t\t\t\"params\" : {\r\n\t\t\t\t\"startDate\" : \"2019-05-28 00:00:00\",\r\n\t\t\t\t\"endDate\" : \"2019-05-20 23:59:59\",\r\n\t\t\t\t\"applyActuals\" : true,\r\n\t\t\t\t\"applyRemainingEstimate\" : false,\r\n\t\t\t\t\"applyMap\" : false\r\n\t\t\t}\r\n\t\t}\r\n\t]\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/projects/:projectID/tasks/:taskID/actions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						":projectID",
+						"tasks",
+						":taskID",
+						"actions"
+					],
+					"variable": [
+						{
+							"key": "projectID",
+							"value": "1A12SNR"
+						},
+						{
+							"key": "taskID",
+							"value": "19EIK5P"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user GET",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/users/:userID",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						":userID"
+					],
+					"variable": [
+						{
+							"key": "userID",
+							"value": "ADMIN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user GET All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/users?fields=id,name,emailAddress1,emailAddress2,emailAddress3&filter=('emailAddress1' like '@')",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "(('emailAddress1' like 'luis.palacios@regoconsulting.com') or ('emailAddress2' like 'luis.palacios@regoconsulting.com')  or ('emailAddress3' like 'luis.palacios@regoconsulting.com'))",
+							"disabled": true
+						},
+						{
+							"key": "fields",
+							"value": "id,name,emailAddress1,emailAddress2,emailAddress3"
+						},
+						{
+							"key": "filter",
+							"value": "('emailAddress1' like '@')"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user POST *",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"object\": {\n        \"lastName\": \"Test\",\n        \"organization\": \"ABC Corporation\"\n    }\n}"
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "timesheet GET date",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources/:resourceID/timesheets?filter=(('referenceDate' = '2020-05-04') AND ('projectID' = 'K4MXY7HE'))",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID",
+						"timesheets"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "(('referenceDate' = '2020-05-04') AND ('projectID' = 'K4MXY7HE'))"
+						},
+						{
+							"key": "filter",
+							"value": "(('referenceDate' = '2019-08-12') AND ('projectID' = 'K0H3XUTW'))",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "ADMIN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "timesheet GET range",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources/:resourceID/timesheets?filter=(('fromDate' = '2019-06-03') and ('toDate' = '2019-06-15'))",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID",
+						"timesheets"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "(('fromDate' = '2019-06-03') and ('toDate' = '2019-06-15'))"
+						},
+						{
+							"key": "filter",
+							"value": "(('fromDate' = '2019-08-05') and ('toDate' = '2019-08-11') and ('projectID' = 'K0H3XUTW'))",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "ADMIN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "timesheet POST",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"records\": [\n\t\t{\n\t\t\t\"object\": {\n\t\t\t\t\"actualEffort\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-08\",\n\t\t\t\t\t\t\"value\": 5\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-14\",\n\t\t\t\t\t\t\"value\": 8\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-17\",\n\t\t\t\t\t\t\"value\": 8\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-18\",\n\t\t\t\t\t\t\"value\": 8\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-15\",\n\t\t\t\t\t\t\"value\": 8\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-07\",\n\t\t\t\t\t\t\"value\": 5\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-09\",\n\t\t\t\t\t\t\"value\": 5\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-16\",\n\t\t\t\t\t\t\"value\": 8\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-10\",\n\t\t\t\t\t\t\"value\": 5\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"startDate\": \"2019-01-11\",\n\t\t\t\t\t\t\"value\": 5\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"workPackageTaskID\": \"TSK001\"\n\t\t\t}\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "{{url}}/resources/:resourceID/timesheets",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID",
+						"timesheets"
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "ADMIN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource Calendar (Special days)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "X",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources/:resourceID/calendar/active/specialDays?filter=(('fromDate' = '2020-05-01') and ('toDate' = '2020-06-15'))",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID",
+						"calendar",
+						"active",
+						"specialDays"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "(('fromDate' = '2020-05-01') and ('toDate' = '2020-06-15'))"
+						}
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "999991"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource Calendar (Default days)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/resources/:resourceID/calendar/active/defaultDays",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID",
+						"calendar",
+						"active",
+						"defaultDays"
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "ADMIN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource Calendar (Special days)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"records\": [\r\n    {\r\n      \"object\" : {\r\n\t      \"date\": \"2020-05-05\",\r\n\t      \"nonWorkPeriods\": [\r\n\t        {\r\n\t          \"startTime\": \"09:00\",\r\n\t          \"finishTime\": \"13:00\",\r\n\t          \"type\": \"Paid Time Off\"\r\n\t        }\r\n\t      ]\r\n      }\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/resources/:resourceID/calendar/active/specialDays",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID",
+						"calendar",
+						"active",
+						"specialDays"
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "ADMIN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource Calendar (Special days) Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"object\" : {\r\n    \"date\" : \"2020-06-08\",\r\n    \"nonWorkPeriods\" : [ {\r\n      \"startTime\" : \"10:00\",\r\n      \"finishTime\" : \"14:00\",\r\n      \"type\" : \"XXX Duty\"\r\n    } ]\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/resources/:resourceID/calendar/active/specialDays",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID",
+						"calendar",
+						"active",
+						"specialDays"
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "ADMIN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resource Calendar actions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"actions\": [\r\n\t\t{\r\n\t\t\t\"name\" : \"removeSpecialDays\",\r\n\t\t\t\"dates\" : [\r\n                \"2020-05-25\",\r\n                \"2020-05-26\",\r\n                \"2020-05-27\",\r\n                \"2020-06-05\",\r\n                \"2020-06-10\",\r\n                \"2020-06-16\",\r\n                \"2020-06-23\",\r\n                \"2020-06-28\",\r\n                \"2020-07-20\",\r\n                \"2020-07-21\",\r\n                \"2020-07-22\",\r\n                \"2020-07-23\",\r\n                \"2020-07-24\",\r\n                \"2020-07-27\",\r\n                \"2020-07-28\",\r\n                \"2020-07-29\",\r\n                \"2020-07-30\",\r\n                \"2020-07-31\"\r\n            ]\r\n\t\t}\r\n\t]\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/resources/:resourceID/calendar/active/actions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"resources",
+						":resourceID",
+						"calendar",
+						"active",
+						"actions"
+					],
+					"variable": [
+						{
+							"key": "resourceID",
+							"value": "999991"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews GET Idea",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/dataviews/:ideaID?dvName=Idea",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews",
+						":ideaID"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Idea"
+						}
+					],
+					"variable": [
+						{
+							"key": "ideaID",
+							"value": "973731"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews GET Idea expand",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/dataviews/:ideaID?dvName=Idea&expand=Idea Attachment",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews",
+						":ideaID"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Idea"
+						},
+						{
+							"key": "expand",
+							"value": "Idea Attachment"
+						}
+					],
+					"variable": [
+						{
+							"key": "ideaID",
+							"value": "267605"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews POST Idea",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"object\": {\r\n    \"name\": \"Product idea JAHR 007\",\r\n    \"uid\": 1164700,\r\n    \"createdDateField\": \"2019-08-11 20:00:00\",\r\n    \"productIdeaFolder\": \"Folder 1.3\",\r\n    \"ideaFolderManager1\": \"\",\r\n    \"ideaFolderManager2\": \"\",\r\n    \"ideaFolderManager3\": \"\",\r\n    \"link\": \"\",\r\n    \"menu\": \"\",\r\n    \"originatorField\": \"Administrator\",\r\n    \"orginatorPicture\": \"\",\r\n    \"parentIdea\": \"\",\r\n    \"priority\": 0,\r\n    \"sponsor\": \"\",\r\n    \"type\": \"Type 2\",\r\n    \"closedProductIdea\": false,\r\n    \"createdDate\": \"2019-08-11 20:00:00\",\r\n    \"openProductIdea\": true,\r\n    \"originator\": \"Administrator\",\r\n    \"selectedProductIdeaFolder\": true,\r\n    \"selectedProductIdeaFolders\": true,\r\n    \"ideaCenterFilter\": true,\r\n    \"workflowConfiguration\": {\r\n            \"workflow\": \"Workflow\",\r\n            \"workflowState\": \"Submitted\"\r\n        }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/dataviews?dvName=Idea",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Idea"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews GET All Deliverables",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/dataviews?dvName=Global Deliverables&filter=(('workflowStateVote' = 'Pending') and ('portfolioField' = 'Portfolio Folders.Portfolio Folder 1.Portfolio Folder 1.2'))",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Global Deliverables"
+						},
+						{
+							"key": "filter",
+							"value": "(('workflowStateVote' = 'Pending') and ('portfolioField' = 'Portfolio Folders.Portfolio Folder 1.Portfolio Folder 1.2'))"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews POST Deliverables (Workflow)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"object\": {\r\n        \"name\": \"Deliverable PF 008\",\r\n        \"uid\": 146139,\r\n        \"workflowConfiguration\": {\r\n            \"workflow\": \"Workflow\",\r\n            \"workflowState\": \"Ongoing\"\r\n        }\r\n      }\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/dataviews?dvName=Global Deliverables",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Global Deliverables"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews GET All Epics",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Sciforma-Version",
+						"value": "{{sciforma_version}}",
+						"type": "text"
+					},
+					{
+						"key": "Reload-Configuration",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/dataviews?dvName=Epics&parentType=projects&parentId=4F6329A9",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Epics"
+						},
+						{
+							"key": "parentType",
+							"value": "projects"
+						},
+						{
+							"key": "parentId",
+							"value": "4F6329A9"
+						},
+						{
+							"key": "filter",
+							"value": "('name' like 'Luis')",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews POST Epic",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"object\": {\r\n        \"name\": \"Testing epics 04\",\r\n        \"description\": \"<p>Hello 04</p>\",\r\n        \"targetFinish\": \"2019-11-21 00:00:00\",\r\n        \"targetStart\": \"2019-11-19 00:00:00\",\r\n        \"workflowConfiguration\": {\r\n            \"workflow\": \"Workflow\",\r\n            \"workflowState\": \"New\"\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/dataviews?dvName=Epics&parentType=projects&parentId=143940B6",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Epics"
+						},
+						{
+							"key": "parentType",
+							"value": "projects"
+						},
+						{
+							"key": "parentId",
+							"value": "143940B6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews GET All Task Diary (2 levels)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/dataviews?dvName=Task Diary&parentType=tasks&parentId=J4H8RLA01&rootId=DELETEME100",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Task Diary"
+						},
+						{
+							"key": "parentType",
+							"value": "tasks"
+						},
+						{
+							"key": "parentId",
+							"value": "J4H8RLA01"
+						},
+						{
+							"key": "rootId",
+							"value": "DELETEME100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dataviews GET All Project Teams",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "sessionId",
+						"type": "text",
+						"value": "{{sessionId}}",
+						"disabled": true
+					},
+					{
+						"key": "apikey",
+						"type": "text",
+						"value": "{{apikey}}"
+					},
+					{
+						"key": "Sciforma-Version",
+						"type": "text",
+						"value": "{{sciforma_version}}"
+					},
+					{
+						"key": "Reload-Configuration",
+						"type": "text",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/dataviews?dvName=Project Team Members&parentType=projects&parentId=E1D8C645",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"dataviews"
+					],
+					"query": [
+						{
+							"key": "dvName",
+							"value": "Project Team Members"
+						},
+						{
+							"key": "parentType",
+							"value": "projects"
+						},
+						{
+							"key": "parentId",
+							"value": "E1D8C645"
+						},
+						{
+							"key": "filter",
+							"value": "('name' like 'Luis')",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f0797b7d-6fa9-409c-9a4a-91a8ba159f9a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2baf3b16-d70a-4e8e-9e89-c4ecc066b5fa",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "98d9962c-173a-47eb-9be1-6ec4bd5e9d7c",
+			"key": "security_url",
+			"value": "https://sciforma-api.regodev.com:8444/sciforma-services/security",
+			"type": "string"
+		},
+		{
+			"id": "1817498c-250f-4c7f-9a9f-ad6fe38f3ca3",
+			"key": "url",
+			"value": "https://sciforma-api.regodev.com:8444/sciforma-services/v1",
+			"type": "string"
+		},
+		{
+			"id": "e7a7f223-f4f5-4f6c-b310-df8baec63233",
+			"key": "sessionId",
+			"value": "53929ed7-85ce-4279-a5fa-af807b416f35",
+			"type": "string"
+		},
+		{
+			"id": "a51996b7-4d85-48cd-942b-fb8045ec3a3f",
+			"key": "apikey",
+			"value": "GsurAtfkjQc6MyfZZe3OTTqGlR5if4",
+			"type": "string"
+		},
+		{
+			"id": "4f49940c-0403-4a59-b236-3c32f110730b",
+			"key": "sciforma_version",
+			"value": "7.1v",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
