@@ -15,7 +15,12 @@ Relative URL: */v1/organizations*
 
 **Description**: Action to obtain a list of Organization records
 
-**Headers**: NONE
+**Headers**: 
+
+| Key | Values | Description | Default value |
+| --- | --- | --- | --- | 
+| Organization-Key | code / name | Defines the unique key used to identify records | name |
+
 > Note: Check the common headers for [requests](README.md#generating-your-request)
 
 **Path parameters**: NONE
@@ -99,7 +104,12 @@ Relative URL: */v1/organizations*
 
 **Description**: Action to obtain one organization record	
 
-**Headers**: NONE
+**Headers**: 
+
+| Key | Values | Description | Default value |
+| --- | --- | --- | --- | 
+| Organization-Key | code / name | Defines the unique key used to identify records | name |
+
 > Note: Check the common headers for [requests](README.md#generating-your-request)
 
 **Path parameters**:
@@ -164,9 +174,11 @@ Relative URL: */v1/organizations*
 
 **Headers**:
 
-| Key | Value | Description | Required |
-| --- | --- | --- | :---: |
-| Content-Type | application/json | Defines the content format | :white_check_mark: |
+| Key | Value | Description | Default value | Required |
+| --- | --- | --- | --- | :---: |
+| Content-Type | application/json | Defines the content format | | :white_check_mark: |
+| Organization-Key | code / name | Defines the unique key used to identify records | name | |
+
 
 > Note: Check the common headers for [requests](README.md#generating-your-request)
 
