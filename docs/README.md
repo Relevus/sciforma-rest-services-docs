@@ -3,7 +3,7 @@
 The SciForma REST API project offers a fast, secure and friendly mechanism for any application to connect to a SciForma environment using REST calls in JSON format.
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/Context%20Model.png?raw=true" />
+<img src="https://regoconsulting.github.io/sciforma-rest-services-docs/img/Context%20Model.png?raw=true" />
 </p>
 
 - ## Quick overview
@@ -13,7 +13,7 @@ The SciForma REST API project offers a fast, secure and friendly mechanism for a
 4. Send your [request](#generating-your-request) and [process](#processing-your-response) the response
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/quickOverview.gif?raw=true" />
+<img src="https://regoconsulting.github.io/sciforma-rest-services-docs/img/quickOverview.gif?raw=true" />
 </p>
 
 ## Table of contents
@@ -237,7 +237,7 @@ A sample postman collection containing all requests is available. To use follow 
    4. Go to the 'Variables' tab and modify them with the values of the URLs of your Sciforma-API environment (security_url and url). Then, set the value for 'sciforma_version' according to the Sciforma version you want to connect.
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/Postman%20VARs.PNG?raw=true" width="650" />
+<img src="https://regoconsulting.github.io/sciforma-rest-services-docs/img/Postman%20VARs.PNG?raw=true" width="650" />
 </p>
    
    5. Open the 'Generate Api key' request, go to 'Body' tab and then enter the authentication credentials and Sciforma URL. After you submit the request and the values are verified, you will receive the apikey code.
@@ -245,17 +245,17 @@ A sample postman collection containing all requests is available. To use follow 
    6. Replace the apiKey code in the Postman collection Variables.
    
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/update_apiKey_in_variables.png?raw=true" width="650" />
+<img src="https://regoconsulting.github.io/sciforma-rest-services-docs/img/update_apiKey_in_variables.png?raw=true" width="650" />
 </p>
    
    7. Test if the configuration is valid sending the request 'Get related api keys'. By default, it uses the apiKey variable. You can modify it by any valid apiKey code.
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/get_related_api_keys.png?raw=true" width="650" />
+<img src="https://regoconsulting.github.io/sciforma-rest-services-docs/img/get_related_api_keys.png?raw=true" width="650" />
 </p>
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/get_related_api_keys_custom.png?raw=true" width="650" />
+<img src="https://regoconsulting.github.io/sciforma-rest-services-docs/img/get_related_api_keys_custom.png?raw=true" width="650" />
 </p>
    
   
