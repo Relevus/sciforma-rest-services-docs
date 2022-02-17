@@ -4,7 +4,7 @@ The SciForma REST API is a lightweight web project that uses the Java API for RE
 It consists of a single WAR file, which contains the required libraries:
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/Deployment%20model.png?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/Deployment%20model.png?raw=true" />
 </p>
 
 <br/>
@@ -19,7 +19,7 @@ It consists of a single WAR file, which contains the required libraries:
 Below is a model of the main components of the application:
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/Main%20components.png?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/Main%20components.png?raw=true" />
 </p>
 
 ### Session handling
@@ -37,7 +37,7 @@ Each session is kept alive in cache by the **SessionConnectionPool** so it can b
 - ## Components interaction in a GET request
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/Get%20request.png?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/Get%20request.png?raw=true" />
 </p>
 
 <br/>
@@ -45,7 +45,7 @@ Each session is kept alive in cache by the **SessionConnectionPool** so it can b
 - ## Components interaction in a POST request
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/Post%20request.png?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/Post%20request.png?raw=true" />
 </p>
 
 <br/>

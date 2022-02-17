@@ -64,5 +64,5 @@ Download the configuration content [here](../packages/sciforma_conf.zip?raw=true
 * Once deployed the war files, the user can change the urls that were set up in the sciforma-services.war to redirect to each Sciforma version. User can do it by editing the file TOMCAT_HOME/webapps/sciforma-services/WEB-INF/classes/com/rego/sciforma/services/util/services_config.properties
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/serviceRedirects.gif?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/serviceRedirects.gif?raw=true" />
 </p>

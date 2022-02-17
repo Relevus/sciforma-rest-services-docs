@@ -51,7 +51,7 @@ set CATALINA_OPTS=-Xms1024m -Xmx1536m
 * Now make the association of Apache TomEE server. Go to the ‘Servers’ tab. (If it is not visible, press CTRL + 3 and search ‘servers’ tab)
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/addingServer.gif?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/addingServer.gif?raw=true" />
 </p>
 
 <br/>

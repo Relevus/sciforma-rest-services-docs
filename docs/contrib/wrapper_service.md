@@ -7,7 +7,7 @@ It is a utilitarian service that facilitates the resolution of the specific URLs
 You configure a list of URLs of the REST services, the system verifies the version and determines where the request is redirected.
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/context_wrapper_service.png?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/context_wrapper_service.png?raw=true" />
 </p>
 
 <br/>
@@ -40,7 +40,7 @@ The <<sciformaVersion>> version is not supported
 The wrapper service makes sure to copy an existing apiKey from a previous version to the new one. Password data is encrypted in the transmission, never transformed to plain text.
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/apiKeyCompatibility.png?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/apiKeyCompatibility.png?raw=true" />
 </p>
 
 <br/>

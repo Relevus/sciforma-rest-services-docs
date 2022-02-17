@@ -33,7 +33,7 @@ projects?filter=((('key' like '1A12SNR') or ('key' = 'JFCF8J0W'))  or (('key' = 
 A conditional tree is built by using each condition of the filter (See image below). In the first iteration of the filter analysis, each condition enclosed by parenthesys is a leaf and each leaf condition is solved by searching the full list of sciforma objects. Once the condition is solved, each leaf is renamed and becomes a part of newer condition for a higher level of the tree, this process creates a simplified version of the tree, and the process of validating each leaf starts again recursively until all the conditions are solved and just one 'master' leaf remains, which is in fact the result of executing the full filter and it is the resulting filtered list.
 
 <p align="center">
-<img src="https://regoconsulting.github.io/sciforma-rest-services/img/Filter_example.PNG?raw=true" />
+<img src="https://relevus.github.io/sciforma-rest-services-docs/img/Filter_example.PNG?raw=true" />
 </p>
 
 **Global filters**:
