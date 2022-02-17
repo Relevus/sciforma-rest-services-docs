@@ -177,7 +177,7 @@ Relative URL: */v1/organizations*
 | Key | Value | Description | Default value | Required |
 | --- | --- | --- | --- | :---: |
 | Content-Type | application/json | Defines the content format | | :white_check_mark: |
-| Organization-Key | code / name | Defines the unique key used to identify records | name | |
+| Organization-Key | code / name | Defines the unique key used to identify records | name | :x: |
 
 
 > Note: Check the common headers for [requests](README.md#generating-your-request)
