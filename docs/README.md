@@ -1,6 +1,6 @@
-# SciForma REST API
+# Sciforma REST API
 
-The SciForma REST API project offers a fast, secure and friendly mechanism for any application to connect to a SciForma environment using REST calls in JSON format.
+The Sciforma REST API project offers a fast, secure and friendly mechanism for any application to connect to a SciForma environment using REST calls in JSON format.
 
 <p align="center">
 <img src="https://relevus.github.io/sciforma-rest-services-docs/img/Context%20Model.png?raw=true" />
